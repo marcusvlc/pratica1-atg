@@ -4,9 +4,9 @@ public interface GraphsMethods {
 	
 	// PARAMETROS DOS METODOS COMENTADOS PARA AJUSTES FUTUROS. 
 	
-	public void readGraph(/*path*/); 
+	public void readGraph (String path); 
 	
-	public void readWeightedGraph(/*path*/); 
+	public void readWeightedGraph(String path); 
 	
 	public int getVertexNumber(/*graph*/); 
 	
