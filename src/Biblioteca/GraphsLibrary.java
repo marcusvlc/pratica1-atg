@@ -14,12 +14,14 @@ public class GraphsLibrary implements GraphsMethods {
 	
 	private static final int NUM_VERTICES_POS = 0;
 	
+	// MAIN PARA REALIZAR TESTES RAPIDOS.
+	// FUTURAMENTE CRIAR TESTES JUNIT
 	public static void main(String[] args) throws FileNotFoundException {
 		GraphsLibrary gl = new GraphsLibrary();
 		gl.readGraph("graph.txt");
 	}
 	
-	/** Metodo que le um arquivo e passa seus elementos para um array
+	/** Metodo que le um arquivo com um grafo e passa seus elementos para um array
 	 * 
 	 * @param elementosProGrafo 
 	 * 		Array que ira guardar os elementos que irao formar o grafo
@@ -30,8 +32,8 @@ public class GraphsLibrary implements GraphsMethods {
 	private void readGraphFile(ArrayList<String> elementosProGrafo, String path) throws FileNotFoundException {
 		try {
 			FileInputStream file = new FileInputStream(path);
-			InputStreamReader is = new InputStreamReader(file);
-			BufferedReader br = new BufferedReader(is);
+			InputStreamReader isr = new InputStreamReader(file);
+			BufferedReader br = new BufferedReader(isr);
 			String line = new String();
 			
 			do {
