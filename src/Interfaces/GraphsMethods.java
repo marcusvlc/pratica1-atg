@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Entidades.Grafo;
+
 public interface GraphsMethods {
 	
 	// PARAMETROS DOS METODOS COMENTADOS PARA AJUSTES FUTUROS. 
@@ -8,11 +10,11 @@ public interface GraphsMethods {
 	
 	public void readWeightedGraph(String path); 
 	
-	public int getVertexNumber(/*graph*/); 
+	public int getVertexNumber(Grafo grafo); 
 	
-	public int getEdgeNumber (/*graph*/);
+	public int getEdgeNumber (Grafo grafo);
 	
-	public  float getMeanEdge(/*graph*/);
+	public  float getMeanEdge(Grafo grafo);
 	
 	public String graphRepresentation (/*graph, type*/);
 	

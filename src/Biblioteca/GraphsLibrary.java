@@ -21,7 +21,7 @@ public class GraphsLibrary implements GraphsMethods {
 		gl.readGraph("graph.txt");
 	}
 	
-	/** Metodo que le um arquivo com um grafo e passa seus elementos para um array
+	/** Metodo que le um arquivo de texto com um grafo e passa seus elementos para um array
 	 * 
 	 * @param elementosProGrafo 
 	 * 		Array que ira guardar os elementos que irao formar o grafo
@@ -79,21 +79,24 @@ public class GraphsLibrary implements GraphsMethods {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	/**
+	 * Retorna o numero de vertices do grafo passado como parametro.
+	 */
+	@Override
+	public int getVertexNumber(Grafo grafo) {
+		return grafo.getNumVertices();
+	}
 
 	@Override
-	public int getVertexNumber() {
+	public int getEdgeNumber(Grafo grafo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getEdgeNumber() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMeanEdge() {
+	public float getMeanEdge(Grafo grafo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
