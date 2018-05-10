@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Entidades.Grafo;
+import Entidades.Node;
 import Interfaces.GraphsMethods;
 
 public class GraphsLibrary implements GraphsMethods {
 	
 	private static final int NUM_VERTICES_POS = 0;
+	private ArrayList<Node> nohs = new ArrayList<Node>();
+
 	
 	// MAIN PARA REALIZAR TESTES RAPIDOS.
 	// FUTURAMENTE CRIAR TESTES JUNIT
@@ -36,6 +39,9 @@ public class GraphsLibrary implements GraphsMethods {
 			BufferedReader br = new BufferedReader(isr);
 			String line = new String();
 			
+			//vai ler a primeira linha do txt que é o numero de vertices
+			//NUM_VERTICES_POS = Integer.parseInt(br.readLine());
+			
 			do {
 				line = br.readLine();
 				if (line != null ) {
@@ -54,14 +60,16 @@ public class GraphsLibrary implements GraphsMethods {
 	public void readGraph(String path)  {
 		ArrayList<String> elementosDoGrafo = new ArrayList<String>();
 
-
 		try {
 			readGraphFile(elementosDoGrafo, path);
 			int numeroDeVertices = Integer.parseInt(elementosDoGrafo.get(NUM_VERTICES_POS));
 			Grafo grafo = new Grafo(numeroDeVertices);
+			for (int i = 0; i <  this.getVertexNumber(grafo); i++) {
+				Node nohTemp = new Node(i + 1);
+				nohs.add(nohTemp);
+			}
 			
-			// faltando construir o grafo.
-			
+			System.out.println(Arrays.toString(nohs.toArray())); //DEBUG
 			System.out.println(Arrays.toString(elementosDoGrafo.toArray())); // DEBUG
 			System.out.println(grafo.getNumVertices()); // DEBUG
 			
@@ -73,6 +81,8 @@ public class GraphsLibrary implements GraphsMethods {
 		
 		
 	}
+
+
 
 	@Override
 	public void readWeightedGraph(String path) {
@@ -135,6 +145,15 @@ public class GraphsLibrary implements GraphsMethods {
 	public String mst() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public ArrayList<Node> getNohs() {
+		return nohs;
+	}
+
+	public void setNohs(ArrayList<Node> nohs) {
+		this.nohs = nohs;
 	}
 
 }
