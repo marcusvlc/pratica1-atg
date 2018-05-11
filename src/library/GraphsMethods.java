@@ -1,6 +1,6 @@
-package Interfaces;
+package library;
 
-import Entidades.Graph;
+import entity.Graph;
 
 import java.io.FileNotFoundException;
 

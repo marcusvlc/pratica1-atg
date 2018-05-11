@@ -1,14 +1,8 @@
-package Biblioteca;
+package library;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
 
-import Entidades.Graph;
-import Entidades.Node;
-import Interfaces.GraphsMethods;
+import entity.Graph;
 
 public class GraphsLibrary implements GraphsMethods {
 
