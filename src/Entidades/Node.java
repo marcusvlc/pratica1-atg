@@ -1,26 +1,39 @@
 package Entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Node<Integer> {
-	protected int data;
-	protected ArrayList<Integer> nos;
+public class Node {
 
-	
-	public Node(int data) {
-		this.data = data;
-		this.nos = new ArrayList<Integer>();
-	}
-	@Override
-	public String toString() {
-		return "" +data;
-	}
-	public int getData() {
-		return data;
-	}
-	
-	public void setNos(Integer noh) {
-		this.nos.add(noh);
+	private final static int DEFAULT_NODE_WEIGTH = 0;
+
+	private int index;
+	private double weight;
+	private List<Node> adjacentNodes;
+
+	public Node(int index, double weight) {
+		this.index = index;
+		this.adjacentNodes = new ArrayList<>();
+		this.weight = weight;
 	}
 
+	public Node(int index) {
+		this(index, DEFAULT_NODE_WEIGTH);
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public List<Node> getAdjacentNodes() {
+		return adjacentNodes;
+	}
+
+	public void setAdjacentNodes(List<Node> adjacentNodes) {
+		this.adjacentNodes = adjacentNodes;
+	}
+
+	public void addAdjacentNode(Node node) {
+		this.adjacentNodes.add(node);
+	}
 }

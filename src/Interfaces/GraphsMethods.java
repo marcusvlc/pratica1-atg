@@ -1,24 +1,26 @@
 package Interfaces;
 
-import Entidades.Grafo;
+import Entidades.Graph;
+
+import java.io.FileNotFoundException;
 
 public interface GraphsMethods {
 	
 	// PARAMETROS DOS METODOS COMENTADOS PARA AJUSTES FUTUROS. 
 	
-	public void readGraph (String path); 
+	public Graph readGraph (String path) throws FileNotFoundException;
 	
 	public void readWeightedGraph(String path); 
 	
-	public int getVertexNumber(Grafo grafo); 
+	public int getVertexNumber(Graph graph);
 	
-	public int getEdgeNumber (Grafo grafo);
+	public int getEdgeNumber (Graph graph);
 	
-	public  float getMeanEdge(Grafo grafo);
+	public  float getMeanEdge(Graph graph);
 	
 	public String graphRepresentation (/*graph, type*/);
 	
-	public String BFS(/*graph, v*/); 
+	public String BFS(Graph graph, int v);
 	
 	public String DFS(/*graph, v*/);
 	

@@ -1,112 +1,84 @@
 package Biblioteca;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
-import Entidades.Grafo;
+import Entidades.Graph;
 import Entidades.Node;
 import Interfaces.GraphsMethods;
 
 public class GraphsLibrary implements GraphsMethods {
-	
-	private static final int NUM_VERTICES_POS = 0;
-	private ArrayList<Node> nohs = new ArrayList<Node>();
 
-	
 	// MAIN PARA REALIZAR TESTES RAPIDOS.
 	// FUTURAMENTE CRIAR TESTES JUNIT
 	public static void main(String[] args) throws FileNotFoundException {
 		GraphsLibrary gl = new GraphsLibrary();
-		gl.readGraph("graph.txt");
+		Graph graph = gl.readGraph("graph.txt");
+		System.out.println(gl.getEdgeNumber(graph));
+		System.out.println(gl.getVertexNumber(graph));
+		System.out.println(gl.BFS(graph, 1));
 	}
-	
+
+	private void addEdge(Graph graph, String fileInputLine) {
+		String[] edge = fileInputLine.split(" ");
+		int node1 = Integer.parseInt(edge[0]);
+		int node2 = Integer.parseInt(edge[1]);
+		graph.addEdge(node1, node2);
+		graph.addEdge(node2, node1);
+	}
+
 	/** Metodo que le um arquivo de texto com um grafo e passa seus elementos para um array
-	 * 
-	 * @param elementosProGrafo 
-	 * 		Array que ira guardar os elementos que irao formar o grafo
+	 *
 	 * @param path
 	 * 		Caminho no qual se encontra o arquivo com o grafo
+	 *
 	 * @throws FileNotFoundException
 	 */
-	private void readGraphFile(ArrayList<String> elementosProGrafo, String path) throws FileNotFoundException {
+	public Graph readGraph(String path) throws FileNotFoundException {
 		try {
+
 			FileInputStream file = new FileInputStream(path);
 			InputStreamReader isr = new InputStreamReader(file);
 			BufferedReader br = new BufferedReader(isr);
-			String line = new String();
-			
-			//vai ler a primeira linha do txt que é o numero de vertices
-			//NUM_VERTICES_POS = Integer.parseInt(br.readLine());
-			
-			do {
-				line = br.readLine();
-				if (line != null ) {
-					elementosProGrafo.add(line);
-				}
-				
-			}while(line != null);
-			
-			
-		} catch(Exception e) {
+			String line = br.readLine();
+
+			int numVertices = Integer.parseInt(line);
+			Graph graph = new Graph(numVertices);
+
+			while ((line = br.readLine()) != null) {
+				this.addEdge(graph, line);
+			}
+
+			return graph;
+
+		} catch(IOException e) {
 			throw new FileNotFoundException("Arquivo do grafo nao foi encontrado!");
 		}
 	}
-	
-	@Override
-	public void readGraph(String path)  {
-		ArrayList<String> elementosDoGrafo = new ArrayList<String>();
-
-		try {
-			readGraphFile(elementosDoGrafo, path);
-			int numeroDeVertices = Integer.parseInt(elementosDoGrafo.get(NUM_VERTICES_POS));
-			Grafo grafo = new Grafo(numeroDeVertices);
-			for (int i = 0; i <  this.getVertexNumber(grafo); i++) {
-				Node nohTemp = new Node(i + 1);
-				nohs.add(nohTemp);
-			}
-			
-			System.out.println(Arrays.toString(nohs.toArray())); //DEBUG
-			System.out.println(Arrays.toString(elementosDoGrafo.toArray())); // DEBUG
-			System.out.println(grafo.getNumVertices()); // DEBUG
-			
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("Algo deu errado na leitura do arquivo que contem o grafo");
-		}
-		
-		
-		
-	}
-
-
 
 	@Override
 	public void readWeightedGraph(String path) {
 		// TODO Auto-generated method stub
-		
 	}
-	
-	
+
 	/**
-	 * Retorna o numero de vertices do grafo passado como parametro.
+	 * Retorna o numero de vertices do graph passado como parametro.
 	 */
 	@Override
-	public int getVertexNumber(Grafo grafo) {
-		return grafo.getNumVertices();
+	public int getVertexNumber(Graph graph) {
+		return graph.getNumVertex();
 	}
 
 	@Override
-	public int getEdgeNumber(Grafo grafo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getEdgeNumber(Graph graph) {
+		return graph.getNumEdges();
 	}
 
 	@Override
-	public float getMeanEdge(Grafo grafo) {
+	public float getMeanEdge(Graph graph) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -118,9 +90,12 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String BFS() {
-		// TODO Auto-generated method stub
-		return null;
+	public String BFS(Graph graph, int v) {
+		String out = "";
+		for (String line : graph.BFS(v)) {
+			out += line;
+		}
+		return out;
 	}
 
 	@Override
@@ -146,14 +121,4 @@ public class GraphsLibrary implements GraphsMethods {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	public ArrayList<Node> getNohs() {
-		return nohs;
-	}
-
-	public void setNohs(ArrayList<Node> nohs) {
-		this.nohs = nohs;
-	}
-
 }
