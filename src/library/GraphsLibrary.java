@@ -14,6 +14,7 @@ public class GraphsLibrary implements GraphsMethods {
 		System.out.println(gl.getEdgeNumber(graph));
 		System.out.println(gl.getVertexNumber(graph));
 		System.out.println(gl.BFS(graph, 1));
+		System.out.println(gl.graphRepresentation(graph, "AL"));
 	}
 
 	private void addEdge(Graph graph, String fileInputLine) {
@@ -78,9 +79,9 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String graphRepresentation() {
+	public String graphRepresentation(Graph graph, String type) {
 		// TODO Auto-generated method stub
-		return null;
+		return graph.graphRepresentation(type);
 	}
 
 	@Override

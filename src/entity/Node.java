@@ -36,4 +36,13 @@ public class Node {
 	public void addAdjacentNode(Node node) {
 		this.adjacentNodes.add(node);
 	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	
 }

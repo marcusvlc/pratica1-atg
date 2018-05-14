@@ -18,7 +18,7 @@ public interface GraphsMethods {
 	
 	public  float getMeanEdge(Graph graph);
 	
-	public String graphRepresentation (/*graph, type*/);
+	public String graphRepresentation (Graph graph, String type);
 	
 	public String BFS(Graph graph, int v);
 	
