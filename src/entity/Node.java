@@ -26,12 +26,12 @@ public class Node {
 	}
 
 	public void addAdjacentNode(int nodeIndex) {
-		Edge newEdge = new Edge (nodeIndex);
+		Edge newEdge = new Edge(nodeIndex);
 		this.edges.add(newEdge);		
 	}
 
 	public void addAdjacentNode(int nodeIndex , double weight) {
-		Edge newEdge = new Edge (nodeIndex, weight);
+		Edge newEdge = new Edge(nodeIndex, weight);
 		this.edges.add(newEdge);		
 	}
 

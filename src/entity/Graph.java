@@ -60,11 +60,11 @@ public class Graph {
 		queue.add(index);
 
 		while (!queue.isEmpty()) {
-			for (Node node : this.adjacencyList[index].getAdjacentNodes()) {
-				if (levels[node.getIndex()] == 0) {
-					levels[node.getIndex()] = levels[index] + 1;
-					queue.add(node.getIndex());
-					out[node.getIndex() - 1] = node.getIndex() + " - " + (levels[node.getIndex()] - 1) + " " + index
+			for (Edge edge : this.adjacencyList[index].getAdjacentNodes()) {
+				if (levels[edge.getNodeIndex()] == 0) {
+					levels[edge.getNodeIndex()] = levels[index] + 1;
+					queue.add(edge.getNodeIndex());
+					out[edge.getNodeIndex() - 1] = edge.getNodeIndex() + " - " + (levels[edge.getNodeIndex()] - 1) + " " + index
 							+ "\n";
 				}
 			}
@@ -104,14 +104,14 @@ public class Graph {
 		for (int i = 1; i < adjacencyList.length; i++) {
 
 			graph += Integer.toString(adjacencyList[i].getIndex()) + " - ";
-			List<Node> node = this.adjacencyList[i].getAdjacentNodes();
+			List<Edge> edges = this.adjacencyList[i].getAdjacentNodes();
 
-			for (Node nodeAux : node) {
-				if (nodeAux.getWeight() != 0.0) {
-					graph += Integer.toString(nodeAux.getIndex()) + "(" + Double.toString(nodeAux.getWeight()) + ")"
+			for (Edge edgeAux : edges) {
+				if (edgeAux.getWeight() != Edge.DEFAULT_NODE_WEIGTH) {
+					graph += Integer.toString(edgeAux.getNodeIndex()) + "(" + Double.toString(edgeAux.getWeight()) + ")"
 							+ " ";
 				} else {
-					graph += Integer.toString(nodeAux.getIndex()) + " ";
+					graph += Integer.toString(edgeAux.getNodeIndex()) + " ";
 				}
 			}
 
@@ -126,14 +126,14 @@ public class Graph {
 
 		for (int i = 1; i < graphRep.length; i++) {
 
-			List<Node> node = this.adjacencyList[i].getAdjacentNodes();
+			List<Edge> edges = this.adjacencyList[i].getAdjacentNodes();
 
-			for (Node nodeAux : node) {
-				int indexLine = nodeAux.getIndex();
+			for (Edge edgeAux : edges) {
+				int indexLine = edgeAux.getNodeIndex();
 
-				if (nodeAux.getWeight() != 0.0) {
+				if (edgeAux.getWeight() != 0.0) {
 
-					graphRep[i][indexLine] = Double.toString(nodeAux.getWeight());
+					graphRep[i][indexLine] = Double.toString(edgeAux.getWeight());
 
 				} else {
 

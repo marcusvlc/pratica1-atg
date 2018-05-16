@@ -10,7 +10,7 @@ public class GraphsLibrary implements GraphsMethods {
 	// FUTURAMENTE CRIAR TESTES JUNIT
 	public static void main(String[] args) throws FileNotFoundException {
 		GraphsLibrary gl = new GraphsLibrary();
-		Graph graph = gl.readGraph("graph.txt");
+		Graph graph = gl.readWeightedGraph("graph.txt");
 		System.out.println(gl.getEdgeNumber(graph));
 		System.out.println(gl.getVertexNumber(graph));
 		System.out.println(gl.BFS(graph, 1));
@@ -24,7 +24,7 @@ public class GraphsLibrary implements GraphsMethods {
 		graph.addEdge(node1, node2);
 		graph.addEdge(node2, node1);
 	}
-	
+
 	private void addWeightedEdge(Graph graph, String fileInputLine) {
 		String[] edge = fileInputLine.split(" ");
 		int node1 = Integer.parseInt(edge[0]);

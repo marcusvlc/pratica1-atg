@@ -5,11 +5,10 @@ public class Edge {
 	private int nodeIndex;
 	private double weight;
 	
-    private final static int DEFAULT_NODE_WEIGTH = 1;
+    public final static int DEFAULT_NODE_WEIGTH = 1;
     
     public Edge(int nodeIndex) {
-    	this.nodeIndex = nodeIndex;
-        this.weight = DEFAULT_NODE_WEIGTH;
+    	this(nodeIndex, DEFAULT_NODE_WEIGTH);
     }
     
     public Edge (int nodeIndex, double weight){
