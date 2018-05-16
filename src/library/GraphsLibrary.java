@@ -25,7 +25,6 @@ public class GraphsLibrary implements GraphsMethods {
 		int node1 = Integer.parseInt(edge[0]);
 		int node2 = Integer.parseInt(edge[1]);
 		graph.addEdge(node1, node2);
-		graph.addEdge(node2, node1);
 	}
 
 	private void addWeightedEdge(Graph graph, String fileInputLine) {
@@ -34,7 +33,6 @@ public class GraphsLibrary implements GraphsMethods {
 		int node2 = Integer.parseInt(edge[1]);
 		double weight = Double.parseDouble(edge[2]);
 		graph.addEdge(node1, node2, weight);
-		graph.addEdge(node2, node1, weight);
 	}
 
 	/** Metodo que le um arquivo de texto com um grafo e passa seus elementos para um array
@@ -141,8 +139,7 @@ public class GraphsLibrary implements GraphsMethods {
 
 	@Override
 	public boolean connected(Graph graph) {
-		// TODO Auto-generated method stub
-		return false;
+		return graph.connected();
 	}
 
 	@Override

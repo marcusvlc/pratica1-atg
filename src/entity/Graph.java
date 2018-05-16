@@ -181,4 +181,52 @@ public class Graph {
 		}
 		return graph;
 	}
+	
+	public boolean connected() {
+		Node auxNode = firstNotNullNode();
+		
+		if(auxNode != null) {
+			LinkedList<Integer> queue =  new LinkedList<>();
+			LinkedList<Integer> visitedNodes =  new LinkedList<>();
+
+			queue.addFirst(auxNode.getIndex());
+			
+			int achievableNodes = 0;
+			
+			while(!queue.isEmpty()) {
+				
+				List<Edge> adjacentNodes = addOrReturnVertex(queue.getFirst()).getAdjacentNodes();
+				
+				for (int i = 0; i < adjacentNodes.size(); i++) {
+					int index = adjacentNodes.get(i).getNodeIndex();
+					if(!visitedNodes.contains(index)) {
+						queue.addLast(index);
+						visitedNodes.add(index);
+						achievableNodes++;
+					}
+				}
+				queue.removeFirst();
+				
+			}
+			
+			if(achievableNodes == this.getNumVertex())
+				return true;
+		}
+		return false;
+		
+	}
+	
+	private Node firstNotNullNode() {
+		Node node = null;
+		
+		int i = 0;
+		while(node == null && i < this.adjacencyList.length) {
+			if(this.adjacencyList[i] != null)
+				node = this.adjacencyList[i];
+			i++;
+		}
+		
+		return node;
+	}
+
 }
