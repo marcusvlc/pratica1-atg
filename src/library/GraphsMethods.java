@@ -10,7 +10,7 @@ public interface GraphsMethods {
 	
 	public Graph readGraph (String path) throws FileNotFoundException;
 	
-	public void readWeightedGraph(String path); 
+	public Graph readWeightedGraph(String path) throws FileNotFoundException; 
 	
 	public int getVertexNumber(Graph graph);
 	

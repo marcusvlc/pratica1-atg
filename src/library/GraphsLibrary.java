@@ -24,6 +24,15 @@ public class GraphsLibrary implements GraphsMethods {
 		graph.addEdge(node1, node2);
 		graph.addEdge(node2, node1);
 	}
+	
+	private void addWeightedEdge(Graph graph, String fileInputLine) {
+		String[] edge = fileInputLine.split(" ");
+		int node1 = Integer.parseInt(edge[0]);
+		int node2 = Integer.parseInt(edge[1]);
+		double weight = Double.parseDouble(edge[2]);
+		graph.addEdge(node1, node2, weight);
+		graph.addEdge(node2, node1, weight);
+	}
 
 	/** Metodo que le um arquivo de texto com um grafo e passa seus elementos para um array
 	 *
@@ -55,8 +64,26 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public void readWeightedGraph(String path) {
-		// TODO Auto-generated method stub
+	public Graph readWeightedGraph(String path) throws FileNotFoundException {
+		try {
+
+			FileInputStream file = new FileInputStream(path);
+			InputStreamReader isr = new InputStreamReader(file);
+			BufferedReader br = new BufferedReader(isr);
+			String line = br.readLine();
+
+			int numVertices = Integer.parseInt(line);
+			Graph graph = new Graph(numVertices);
+
+			while ((line = br.readLine()) != null) {
+				this.addWeightedEdge(graph, line);
+			}
+
+			return graph;
+
+		} catch(IOException e) {
+			throw new FileNotFoundException("Arquivo do grafo nao foi encontrado!");
+		}
 	}
 
 	/**
@@ -80,7 +107,6 @@ public class GraphsLibrary implements GraphsMethods {
 
 	@Override
 	public String graphRepresentation(Graph graph, String type) {
-		// TODO Auto-generated method stub
 		return graph.graphRepresentation(type);
 	}
 
