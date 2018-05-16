@@ -24,7 +24,7 @@ public interface GraphsMethods {
 	
 	public String DFS(/*graph, v*/);
 	
-	public String SCC(/*graph */);
+	public boolean connected(Graph graph);
 	
 	public String shortestPath(/*v1, v2 */);
 	

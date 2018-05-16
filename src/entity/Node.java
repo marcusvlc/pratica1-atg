@@ -5,44 +5,34 @@ import java.util.List;
 
 public class Node {
 
-	private final static int DEFAULT_NODE_WEIGTH = 0;
-
 	private int index;
-	private double weight;
-	private List<Node> adjacentNodes;
-
-	public Node(int index, double weight) {
-		this.index = index;
-		this.adjacentNodes = new ArrayList<>();
-		this.weight = weight;
-	}
+	private List<Edge> edges;
 
 	public Node(int index) {
-		this(index, DEFAULT_NODE_WEIGTH);
+		this.index = index;
+		this.edges = new ArrayList<>();
 	}
 
 	public int getIndex() {
 		return index;
 	}
 
-	public List<Node> getAdjacentNodes() {
-		return adjacentNodes;
+	public List<Edge> getAdjacentNodes() {
+		return edges;
 	}
 
-	public void setAdjacentNodes(List<Node> adjacentNodes) {
-		this.adjacentNodes = adjacentNodes;
+	public void setAdjacentNodes(List<Edge> edges) {
+		this.edges = edges;
 	}
 
-	public void addAdjacentNode(Node node) {
-		this.adjacentNodes.add(node);
+	public void addAdjacentNode(int nodeIndex) {
+		Edge newEdge = new Edge (nodeIndex);
+		this.edges.add(newEdge);		
 	}
 
-	public double getWeight() {
-		return weight;
+	public void addAdjacentNode(int nodeIndex , double weight) {
+		Edge newEdge = new Edge (nodeIndex, weight);
+		this.edges.add(newEdge);		
 	}
 
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-	
 }

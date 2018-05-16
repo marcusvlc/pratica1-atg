@@ -34,12 +34,21 @@ public class Graph {
 		return node;
 	}
 
+	//Adiciona aresta sem peso (peso padrao eh 1)
 	public void addEdge(int from, int to) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode);
+		fromNode.addAdjacentNode(toNode.getIndex());
+		toNode.addAdjacentNode(fromNode.getIndex());
 	}
-
+	//Adiciona aresta com peso
+	public void addEdge(int from, int to, double weight) {
+		Node fromNode = this.addOrReturnVertex(from);
+		Node toNode = this.addOrReturnVertex(to);
+		fromNode.addAdjacentNode(toNode.getIndex(), weight);
+		toNode.addAdjacentNode(fromNode.getIndex(), weight);
+	}
+	
 	public String[] BFS(int index) {
 
 		String[] out = new String[this.getNumVertex()];

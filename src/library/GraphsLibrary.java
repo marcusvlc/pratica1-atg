@@ -100,9 +100,9 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String SCC() {
+	public boolean connected(Graph graph) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
@@ -116,4 +116,6 @@ public class GraphsLibrary implements GraphsMethods {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }
