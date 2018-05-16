@@ -26,7 +26,7 @@ public class Graph {
 				numEdges += node.getAdjacentNodes().size();
 			}
 		}
-		return numEdges;
+		return numEdges / 2;
 	}
 
 	public Node addOrReturnVertex(int index) {

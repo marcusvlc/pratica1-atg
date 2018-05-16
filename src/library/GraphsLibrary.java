@@ -1,24 +1,11 @@
 package library;
 
-import java.awt.Adjustable;
 import java.io.*;
 
 import entity.Graph;
 
 public class GraphsLibrary implements GraphsMethods {
 
-	// MAIN PARA REALIZAR TESTES RAPIDOS.
-	// FUTURAMENTE CRIAR TESTES JUNIT
-	public static void main(String[] args) throws FileNotFoundException {
-		GraphsLibrary gl = new GraphsLibrary();
-		Graph graph = gl.readWeightedGraph("graph.txt");
-//		System.out.println(gl.getEdgeNumber(graph));
-//		System.out.println(gl.getVertexNumber(graph));
-//		System.out.println(gl.BFS(graph, 1));
-		System.out.println(gl.graphRepresentation(graph, "AL"));
-		
-		System.out.println(gl.getMeanEdge(graph));
-	}
 
 	private void addEdge(Graph graph, String fileInputLine) {
 		String[] edge = fileInputLine.split(" ");
@@ -112,9 +99,9 @@ public class GraphsLibrary implements GraphsMethods {
 			}
 		}
 		
-		sum = sum / 4;
+		sum = sum / 2;
 		
-		return sum / (graph.getNumEdges() / 4);
+		return sum / (graph.getNumEdges());
 	}
 
 	@Override
