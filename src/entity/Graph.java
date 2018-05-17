@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Graph {
 
+	private boolean default_weigth;
+	
 	private Node[] adjacencyList;
 
 	public Graph(int numVertex) {
@@ -228,5 +230,15 @@ public class Graph {
 		
 		return node;
 	}
+
+	public boolean getDefault_weigth() {
+		return default_weigth;
+	}
+
+	public void setDefault_weigth(boolean default_weigth) {
+		this.default_weigth = default_weigth;
+	}
+	
+	
 
 }
