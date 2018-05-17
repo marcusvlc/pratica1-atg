@@ -73,9 +73,23 @@ class GraphsLibraryTests {
 		
 		
 		String typeALWeight = graphLibrary.graphRepresentation(g1, "AL");
+		String typeALWeightExpec = "1 - 2(0.1) 5(1.0) \r\n" + 
+									"2 - 1(0.1) 5(0.2) \r\n" + 
+									"3 - 5(5.0) 4(-9.5) \r\n" + 
+									"4 - 3(-9.5) 5(2.3) \r\n" + 
+									"5 - 2(0.2) 3(5.0) 4(2.3) 1(1.0) \r\n" + 
+																		"";
+		assertEquals(typeALWeightExpec, typeALWeight);
 		
-		//assertEquals(expected, actual);
 		String typeAMWeight = graphLibrary.graphRepresentation(g1, "AM");
+		String typeAMWeightExpec =	" 0 1 2 3 4 5\r\n" + 
+									" 1 0 0.1 0 0 1.0\r\n" + 
+									" 2 0.1 0 0 0 0.2\r\n" + 
+									" 3 0 0 0 -9.5 5.0\r\n" + 
+									" 4 0 0 -9.5 0 2.3\r\n" + 
+									" 5 1.0 0.2 5.0 2.3 0\r\n"; 
+		assertEquals(typeAMWeightExpec, typeAMWeight);
+		
 		
 		String typeAL = graphsLibrary2.graphRepresentation(g2, "AL");
 		String typeAM = graphsLibrary2.graphRepresentation(g2, "AM");
