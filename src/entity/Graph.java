@@ -98,6 +98,8 @@ public class Graph {
 
 		} else if (type.equals("AL")) {
 			graph = this.graphRepresentationAL();
+		} else {
+			graph = "incompatible type";
 		}
 
 		return graph;

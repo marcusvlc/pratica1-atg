@@ -64,6 +64,14 @@ class GraphsLibraryTests {
 		Assert.assertEquals(-0.15000004, graphLibrary.getMeanEdge(g1), 0.00000001);
 	}
 	
+	@Test
+	public void testGraphRepresentation() throws FileNotFoundException {
+		graphLibrary = new GraphsLibrary();
+		Graph g1 = graphLibrary.readWeightedGraph("graph.txt");
+		
+		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
+	}
+	
 	
 	
 	
