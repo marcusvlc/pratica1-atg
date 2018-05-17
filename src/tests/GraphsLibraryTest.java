@@ -1,17 +1,19 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import entity.Graph;
 import junit.framework.Assert;
 import library.GraphsLibrary;
 
-class GraphsLibraryTests {
+class GraphsLibraryTest {
 
 	private GraphsLibrary graphLibrary;
 	private Graph basicGraph;
@@ -71,12 +73,5 @@ class GraphsLibraryTests {
 		
 		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }
