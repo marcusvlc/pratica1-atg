@@ -92,8 +92,22 @@ class GraphsLibraryTests {
 		
 		
 		String typeAL = graphsLibrary2.graphRepresentation(g2, "AL");
-		String typeAM = graphsLibrary2.graphRepresentation(g2, "AM");
+		String typeALExpec ="1 - 2 5 \r\n" + 
+							"2 - 1 5 \r\n" + 
+							"3 - 5 4 \r\n" + 
+							"4 - 3 5 \r\n" + 
+							"5 - 2 3 4 1 \r\n";
 		
+		assertEquals(typeALExpec, typeAL);
+		String typeAM = graphsLibrary2.graphRepresentation(g2, "AM");
+		String typeAMExpec =" 0 1 2 3 4 5\r\n" + 
+							" 1 0 1 0 0 1\r\n" + 
+							" 2 1 0 0 0 1\r\n" + 
+							" 3 0 0 0 1 1\r\n" + 
+							" 4 0 0 1 0 1\r\n" + 
+							" 5 1 1 1 1 0\r\n";
+		
+		assertEquals(typeAMExpec, typeAM);
 	}
 	
 	
