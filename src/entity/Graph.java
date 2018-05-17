@@ -257,4 +257,61 @@ public class Graph {
 		this.default_weigth = default_weigth;
 	}
 
+	public boolean union_find() {
+		boolean isCycle = false;
+		int[] subSet = new int[adjacencyList.length-1];
+		int[][] graphMatrixInt = graphMatrixInt();
+		
+		for (int i = 0; i < subSet.length; i++) {
+			for (int j = i; j < subSet.length; j++) {
+				if(graphMatrixInt[i][j] == 1) {
+					int v1 = find(subSet, i);
+					int v2 = find(subSet, j);
+					
+					if(v1 == v2) {
+						isCycle = true;
+					} else {
+						union(subSet, v1, v2);
+					}
+				}
+			}
+			
+		}
+		return isCycle;
+		
+	}
+	
+	
+	public int[][] graphMatrixInt(){
+		
+		int[][] matrixInt = new int[this.adjacencyList.length -1][this.adjacencyList.length -1];
+		
+		for (int i = 1; i < this.adjacencyList.length; i++) {
+			List<Edge> edges = adjacencyList[i].getAdjacentNodes();
+			for (Edge edge : edges) {
+				int index = edge.getNodeIndex();
+				matrixInt[i-1][index-1] = 1;
+			}
+		}
+		
+		return matrixInt;
+	}
+	
+	public int find(int[] subSet, int v) {
+		
+		if(subSet[v] == 0)
+			return v;
+		return find(subSet, subSet[v]);
+		
+	}
+	
+	public void union(int[] subSet, int v1, int v2) {
+		
+		int v1_set = find(subSet, v1);
+		int v2_set = find(subSet, v2);
+		
+		subSet[v1_set] = v2_set;
+		
+	}
 }
+
