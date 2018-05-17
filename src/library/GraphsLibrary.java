@@ -44,6 +44,8 @@ public class GraphsLibrary implements GraphsMethods {
 				this.addEdge(graph, line);
 			}
 
+			graph.setDefault_weigth(true);
+			
 			return graph;
 
 		} catch(IOException e) {
@@ -67,6 +69,8 @@ public class GraphsLibrary implements GraphsMethods {
 				this.addWeightedEdge(graph, line);
 			}
 
+			graph.setDefault_weigth(false);
+			
 			return graph;
 
 		} catch(IOException e) {
