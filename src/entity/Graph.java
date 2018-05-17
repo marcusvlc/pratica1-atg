@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Graph {
 
+
 	private boolean default_weigth;
-	
+
 	private Node[] adjacencyList;
 
 	public Graph(int numVertex) {
 		this.adjacencyList = new Node[numVertex + 1];
 	}
-	
+
 	public Node[] getAdjacencyList() {
 		return this.adjacencyList;
 	}
@@ -40,21 +41,22 @@ public class Graph {
 		return node;
 	}
 
-	//Adiciona aresta sem peso (peso padrao eh 1)
+	// Adiciona aresta sem peso (peso padrao eh 1)
 	public void addEdge(int from, int to) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
 		fromNode.addAdjacentNode(toNode.getIndex());
 		toNode.addAdjacentNode(fromNode.getIndex());
 	}
-	//Adiciona aresta com peso
+
+	// Adiciona aresta com peso
 	public void addEdge(int from, int to, double weight) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
 		fromNode.addAdjacentNode(toNode.getIndex(), weight);
 		toNode.addAdjacentNode(fromNode.getIndex(), weight);
 	}
-	
+
 	public String[] BFS(int index) {
 
 		String[] out = new String[this.getNumVertex()];
@@ -70,8 +72,8 @@ public class Graph {
 				if (levels[edge.getNodeIndex()] == 0) {
 					levels[edge.getNodeIndex()] = levels[index] + 1;
 					queue.add(edge.getNodeIndex());
-					out[edge.getNodeIndex() - 1] = edge.getNodeIndex() + " - " + (levels[edge.getNodeIndex()] - 1) + " " + index
-							+ "\n";
+					out[edge.getNodeIndex() - 1] = edge.getNodeIndex() + " - " + (levels[edge.getNodeIndex()] - 1) + " "
+							+ index + "\n";
 				}
 			}
 			queue.removeFirst();
@@ -81,6 +83,20 @@ public class Graph {
 
 		return out;
 	}
+	
+	
+	public String[] DFS(Graph graph, int index, int[] levels, String[] out) {
+	     for (Edge edge : (adjacencyList[index].getAdjacentNodes())) {
+	         if (levels[edge.getNodeIndex()] == 0){ 
+	        	 out[edge.getNodeIndex()] = edge.getNodeIndex() + " ";
+	        	 levels[edge.getNodeIndex()] = levels[index] + 1;
+	        	 DFS(graph, edge.getNodeIndex(), levels, out);
+	         }
+	}
+		return out;
+	     
+	}
+
 
 	public String graphRepresentation(String type) {
 
@@ -126,7 +142,7 @@ public class Graph {
 			graph += System.lineSeparator();
 
 		}
-		
+
 		return graph;
 	}
 
@@ -185,51 +201,51 @@ public class Graph {
 		}
 		return graph;
 	}
-	
+
 	public boolean connected() {
 		Node auxNode = firstNotNullNode();
-		
-		if(auxNode != null) {
-			LinkedList<Integer> queue =  new LinkedList<>();
-			LinkedList<Integer> visitedNodes =  new LinkedList<>();
+
+		if (auxNode != null) {
+			LinkedList<Integer> queue = new LinkedList<>();
+			LinkedList<Integer> visitedNodes = new LinkedList<>();
 
 			queue.addFirst(auxNode.getIndex());
-			
+
 			int achievableNodes = 0;
-			
-			while(!queue.isEmpty()) {
-				
+
+			while (!queue.isEmpty()) {
+
 				List<Edge> adjacentNodes = addOrReturnVertex(queue.getFirst()).getAdjacentNodes();
-				
+
 				for (int i = 0; i < adjacentNodes.size(); i++) {
 					int index = adjacentNodes.get(i).getNodeIndex();
-					if(!visitedNodes.contains(index)) {
+					if (!visitedNodes.contains(index)) {
 						queue.addLast(index);
 						visitedNodes.add(index);
 						achievableNodes++;
 					}
 				}
 				queue.removeFirst();
-				
+
 			}
-			
-			if(achievableNodes == this.getNumVertex())
+
+			if (achievableNodes == this.getNumVertex())
 				return true;
 		}
 		return false;
-		
+
 	}
-	
+
 	private Node firstNotNullNode() {
 		Node node = null;
-		
+
 		int i = 0;
-		while(node == null && i < this.adjacencyList.length) {
-			if(this.adjacencyList[i] != null)
+		while (node == null && i < this.adjacencyList.length) {
+			if (this.adjacencyList[i] != null)
 				node = this.adjacencyList[i];
 			i++;
 		}
-		
+
 		return node;
 	}
 
@@ -240,7 +256,5 @@ public class Graph {
 	public void setDefault_weigth(boolean default_weigth) {
 		this.default_weigth = default_weigth;
 	}
-	
-	
 
 }

@@ -1,8 +1,11 @@
 package library;
 
 import java.io.*;
+import java.util.LinkedList;
 
+import entity.Edge;
 import entity.Graph;
+import entity.Node;
 
 public class GraphsLibrary implements GraphsMethods {
 
@@ -123,9 +126,13 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String DFS() {
-		// TODO Auto-generated method stub
-		return null;
+	public String DFS(Graph graph, int v) {
+		String[] out = new String[graph.getNumVertex()];
+		int[] levels = new int[graph.getNumVertex() + 1];
+	    String res = "";
+	    	    for(Edge edge : (graph.getAdjacencyList()[v].getAdjacentNodes()))
+	    	        res += graph.DFS(graph, v + 1, levels, out);
+	    	    return res;
 	}
 
 	@Override

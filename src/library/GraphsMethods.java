@@ -22,7 +22,7 @@ public interface GraphsMethods {
 	
 	public String BFS(Graph graph, int v);
 	
-	public String DFS(/*graph, v*/);
+	public String DFS(Graph graph, int v);
 	
 	public boolean connected(Graph graph);
 	
