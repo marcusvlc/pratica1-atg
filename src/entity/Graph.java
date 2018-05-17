@@ -45,16 +45,16 @@ public class Graph {
 	public void addEdge(int from, int to) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex());
-		toNode.addAdjacentNode(fromNode.getIndex());
+		fromNode.addAdjacentNode(toNode.getIndex(),from);
+		toNode.addAdjacentNode(fromNode.getIndex(),to);
 	}
 
 	// Adiciona aresta com peso
 	public void addEdge(int from, int to, double weight) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex(), weight);
-		toNode.addAdjacentNode(fromNode.getIndex(), weight);
+		fromNode.addAdjacentNode(toNode.getIndex(), weight,from);
+		toNode.addAdjacentNode(fromNode.getIndex(), weight,to);
 	}
 
 	public String[] BFS(int index) {
