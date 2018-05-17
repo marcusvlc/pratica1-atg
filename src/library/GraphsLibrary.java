@@ -44,7 +44,7 @@ public class GraphsLibrary implements GraphsMethods {
 				this.addEdge(graph, line);
 			}
 
-			graph.setDefault_weigth(true);
+			graph.setDefault_weigth(false);
 			
 			return graph;
 
@@ -69,7 +69,7 @@ public class GraphsLibrary implements GraphsMethods {
 				this.addWeightedEdge(graph, line);
 			}
 
-			graph.setDefault_weigth(false);
+			graph.setDefault_weigth(true);
 			
 			return graph;
 

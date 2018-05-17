@@ -113,7 +113,7 @@ public class Graph {
 			List<Edge> edges = this.adjacencyList[i].getAdjacentNodes();
 
 			for (Edge edgeAux : edges) {
-				if (edgeAux.getWeight() != Edge.DEFAULT_NODE_WEIGTH) {
+				if (this.default_weigth == true) {
 					graph += Integer.toString(edgeAux.getNodeIndex()) + "(" + Double.toString(edgeAux.getWeight()) + ")"
 							+ " ";
 				} else {
@@ -137,7 +137,7 @@ public class Graph {
 			for (Edge edgeAux : edges) {
 				int indexLine = edgeAux.getNodeIndex();
 
-				if (edgeAux.getWeight() != 0.0) {
+				if (this.default_weigth == true) {
 
 					graphRep[i][indexLine] = Double.toString(edgeAux.getWeight());
 
