@@ -1,6 +1,6 @@
 package entity;
 
-public class Edge {
+public class Edge implements Comparable<Edge>{
 	
 	private int nodeIndex;
 	private int nodeIndexPre;
@@ -37,6 +37,19 @@ public class Edge {
 	public int getNodeIndexPre() {
 		return nodeIndexPre;
 	}
+
+	@Override
+	public int compareTo(Edge o) {
+		if(this.weight < o.weight) {
+			return -1;
+		}
+		if(this.weight > o.weight) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	
 	
 
 }
