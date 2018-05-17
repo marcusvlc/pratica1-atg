@@ -68,8 +68,18 @@ class GraphsLibraryTests {
 	public void testGraphRepresentation() throws FileNotFoundException {
 		graphLibrary = new GraphsLibrary();
 		Graph g1 = graphLibrary.readWeightedGraph("graph.txt");
+		GraphsLibrary graphsLibrary2 = new GraphsLibrary();
+		Graph g2 = graphsLibrary2.readGraph("graph.txt");
 		
-		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
+		
+		String typeALWeight = graphLibrary.graphRepresentation(g1, "AL");
+		
+		//assertEquals(expected, actual);
+		String typeAMWeight = graphLibrary.graphRepresentation(g1, "AM");
+		
+		String typeAL = graphsLibrary2.graphRepresentation(g2, "AL");
+		String typeAM = graphsLibrary2.graphRepresentation(g2, "AM");
+		
 	}
 	
 	
