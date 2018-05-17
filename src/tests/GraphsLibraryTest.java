@@ -72,6 +72,8 @@ class GraphsLibraryTest {
 		Graph g1 = graphLibrary.readWeightedGraph("graph.txt");
 		
 		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
+		
+		boolean isCycle = g1.union_find();
 	}
 
 }
