@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.HashMap;
+import java.io.FileNotFoundException;
 import java.io.LineNumberInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -207,7 +208,12 @@ public class Graph {
 		}
 		return graph;
 	}
-
+	
+	/**
+	 * Retorna true se o grafo eh conexo, ou seja, existe um caminho entre qualquer par de nodes
+	 * 
+	 * @return Boolean true se eh conexo, false caso contrario
+	 */
 	public boolean connected() {
 		Node auxNode = firstNotNullNode();
 
@@ -241,7 +247,12 @@ public class Graph {
 		return false;
 
 	}
-
+	
+	/**
+	 * Metodo auxiliar para connected. Encontra o primeiro Node da adjacencyList
+	 * 
+	 * @return Node, primeiro node encontrado da adjacencyList
+	 */
 	private Node firstNotNullNode() {
 		Node node = null;
 
@@ -262,7 +273,15 @@ public class Graph {
 	public void setDefault_weigth(boolean default_weigth) {
 		this.default_weigth = default_weigth;
 	}
-
+	
+	/**
+	 * Encontra o menor caminho entre dois nodes dados
+	 * 
+	 * @param Node "raiz", v1
+	 * @param Node a ser encontrado atraves do menor caminho, v2
+	 * 
+	 * @return String contendo o menor caminho
+	 */
 	public String shortestPath(Node v1, Node v2) {
 		Map<Node, Double> graphNodes = new HashMap<Node, Double>();
 		Map<Integer, Double> nodeDistance = new HashMap<Integer, Double>();
@@ -308,7 +327,14 @@ public class Graph {
 		
 		return shortestPath;
 	}
-
+	
+	/**
+	 * Metodo auxiliar para o shortestPath que encontra o node com menor peso em um Map
+	 * 
+	 * @param Map<Node, Double> que contem os nodes e seu respectivos pesos 
+	 * 
+	 * @return Node, node com o menor peso do Map
+	 */
 	private Node extractMin(Map<Node, Double> graphNodes ) {
 		double minValue = Double.MAX_VALUE;
 		Node nodeIndex = null;
