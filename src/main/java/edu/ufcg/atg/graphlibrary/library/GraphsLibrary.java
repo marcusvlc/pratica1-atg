@@ -1,9 +1,9 @@
-package library;
+package edu.ufcg.atg.graphlibrary.library;
 
 import java.io.*;
 
-import entity.Graph;
-import entity.Node;
+import edu.ufcg.atg.graphlibrary.entity.Graph;
+import edu.ufcg.atg.graphlibrary.entity.Node;
 
 public class GraphsLibrary implements GraphsMethods {
 	
@@ -63,7 +63,8 @@ public class GraphsLibrary implements GraphsMethods {
 			while ((line = br.readLine()) != null) {
 				this.addEdge(graph, line);
 			}
-
+			
+			br.close();
 			graph.setDefault_weigth(false);
 			
 			return graph;
@@ -93,7 +94,8 @@ public class GraphsLibrary implements GraphsMethods {
 			while ((line = br.readLine()) != null) {
 				this.addWeightedEdge(graph, line);
 			}
-
+			
+			br.close();
 			graph.setDefault_weigth(true);
 			
 			return graph;

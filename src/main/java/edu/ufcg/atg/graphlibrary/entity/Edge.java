@@ -1,4 +1,4 @@
-package entity;
+package edu.ufcg.atg.graphlibrary.entity;
 
 public class Edge implements Comparable<Edge>{
 	
@@ -48,8 +48,4 @@ public class Edge implements Comparable<Edge>{
 		}
 		return 0;
 	}
-	
-	
-	
-
 }

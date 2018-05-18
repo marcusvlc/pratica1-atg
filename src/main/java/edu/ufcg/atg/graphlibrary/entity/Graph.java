@@ -1,4 +1,4 @@
-package entity;
+package edu.ufcg.atg.graphlibrary.entity;
 
 import java.util.HashMap;
 import java.util.ArrayList;

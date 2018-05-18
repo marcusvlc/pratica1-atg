@@ -1,7 +1,7 @@
-package library;
+package edu.ufcg.atg.graphlibrary.library;
 
-import entity.Graph;
-import entity.Node;
+import edu.ufcg.atg.graphlibrary.entity.Graph;
+import edu.ufcg.atg.graphlibrary.entity.Node;
 
 import java.io.FileNotFoundException;
 
