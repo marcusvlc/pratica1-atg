@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import entity.Edge;
 import entity.Graph;
 import junit.framework.Assert;
 import library.GraphsLibrary;
@@ -74,6 +76,8 @@ class GraphsLibraryTest {
 		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
 		
 		boolean isCycle = g1.union_find();
+		
+		ArrayList<Edge> edges = g1.listEdges();
 	}
 
 }

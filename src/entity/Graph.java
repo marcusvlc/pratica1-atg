@@ -1,10 +1,12 @@
 package entity;
 
+import java.io.LineNumberInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
-
 
 	private boolean default_weigth;
 
@@ -45,16 +47,16 @@ public class Graph {
 	public void addEdge(int from, int to) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex(),from);
-		toNode.addAdjacentNode(fromNode.getIndex(),to);
+		fromNode.addAdjacentNode(toNode.getIndex(), from);
+		toNode.addAdjacentNode(fromNode.getIndex(), to);
 	}
 
 	// Adiciona aresta com peso
 	public void addEdge(int from, int to, double weight) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex(), weight,from);
-		toNode.addAdjacentNode(fromNode.getIndex(), weight,to);
+		fromNode.addAdjacentNode(toNode.getIndex(), weight, from);
+		toNode.addAdjacentNode(fromNode.getIndex(), weight, to);
 	}
 
 	public String[] BFS(int index) {
@@ -83,20 +85,18 @@ public class Graph {
 
 		return out;
 	}
-	
-	
-	public String[] DFS(Graph graph, int index, int[] levels, String[] out) {
-	     for (Edge edge : (adjacencyList[index].getAdjacentNodes())) {
-	         if (levels[edge.getNodeIndex()] == 0){ 
-	        	 out[edge.getNodeIndex()] = edge.getNodeIndex() + " ";
-	        	 levels[edge.getNodeIndex()] = levels[index] + 1;
-	        	 DFS(graph, edge.getNodeIndex(), levels, out);
-	         }
-	}
-		return out;
-	     
-	}
 
+	public String[] DFS(Graph graph, int index, int[] levels, String[] out) {
+		for (Edge edge : (adjacencyList[index].getAdjacentNodes())) {
+			if (levels[edge.getNodeIndex()] == 0) {
+				out[edge.getNodeIndex()] = edge.getNodeIndex() + " ";
+				levels[edge.getNodeIndex()] = levels[index] + 1;
+				DFS(graph, edge.getNodeIndex(), levels, out);
+			}
+		}
+		return out;
+
+	}
 
 	public String graphRepresentation(String type) {
 
@@ -259,59 +259,82 @@ public class Graph {
 
 	public boolean union_find() {
 		boolean isCycle = false;
-		int[] subSet = new int[adjacencyList.length-1];
+		int[] subSet = new int[adjacencyList.length - 1];
 		int[][] graphMatrixInt = graphMatrixInt();
-		
+
 		for (int i = 0; i < subSet.length; i++) {
 			for (int j = i; j < subSet.length; j++) {
-				if(graphMatrixInt[i][j] == 1) {
+				if (graphMatrixInt[i][j] == 1) {
 					int v1 = find(subSet, i);
 					int v2 = find(subSet, j);
-					
-					if(v1 == v2) {
+
+					if (v1 == v2) {
 						isCycle = true;
 					} else {
 						union(subSet, v1, v2);
 					}
 				}
 			}
-			
+
 		}
 		return isCycle;
-		
+
 	}
-	
-	
-	public int[][] graphMatrixInt(){
-		
-		int[][] matrixInt = new int[this.adjacencyList.length -1][this.adjacencyList.length -1];
-		
+
+	public int[][] graphMatrixInt() {
+
+		int[][] matrixInt = new int[this.adjacencyList.length - 1][this.adjacencyList.length - 1];
+
 		for (int i = 1; i < this.adjacencyList.length; i++) {
 			List<Edge> edges = adjacencyList[i].getAdjacentNodes();
 			for (Edge edge : edges) {
 				int index = edge.getNodeIndex();
-				matrixInt[i-1][index-1] = 1;
+				matrixInt[i - 1][index - 1] = 1;
 			}
 		}
-		
+
 		return matrixInt;
 	}
-	
+
 	public int find(int[] subSet, int v) {
-		
-		if(subSet[v] == 0)
+
+		if (subSet[v] == 0)
 			return v;
 		return find(subSet, subSet[v]);
-		
+
 	}
-	
+
 	public void union(int[] subSet, int v1, int v2) {
-		
+
 		int v1_set = find(subSet, v1);
 		int v2_set = find(subSet, v2);
-		
+
 		subSet[v1_set] = v2_set;
+
+	}
+
+	public boolean graphMST() {
+		ArrayList<Edge> listEdges = listEdges();
+		
+		Graph graphMSTAux = new Graph(this.adjacencyList.length);
+		
+		
+		
+		return false;
 		
 	}
-}
 
+	public ArrayList<Edge> listEdges() {
+		ArrayList<Edge> edges = new ArrayList<>();
+
+		for (int i = 1; i < adjacencyList.length; i++) {
+			List<Edge> edgesNode = adjacencyList[i].getAdjacentNodes();
+
+			for (Edge edge : edgesNode) {
+				edges.add(edge);
+			}
+		}
+		Collections.sort(edges);
+		return edges;
+	}
+}
