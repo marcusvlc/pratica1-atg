@@ -27,13 +27,13 @@ public class Node {
 		this.edges = edges;
 	}
 
-	public void addAdjacentNode(int nodeIndex,int nodeIndexPre) {
-		Edge newEdge = new Edge(nodeIndex, nodeIndexPre);
+	public void addAdjacentNode(int nodeIndex) {
+		Edge newEdge = new Edge(nodeIndex);
 		this.edges.add(newEdge);		
 	}
 
-	public void addAdjacentNode(int nodeIndex , double weight, int nodeIndexPre) {
-		Edge newEdge = new Edge(nodeIndex, weight, nodeIndexPre);
+	public void addAdjacentNode(int nodeIndex , double weight) {
+		Edge newEdge = new Edge(nodeIndex, weight);
 		this.edges.add(newEdge);		
 	}
 

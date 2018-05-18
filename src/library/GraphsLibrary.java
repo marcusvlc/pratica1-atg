@@ -9,6 +9,7 @@ import entity.Node;
 
 public class GraphsLibrary implements GraphsMethods {
 
+
 	private void addEdge(Graph graph, String fileInputLine) {
 		String[] edge = fileInputLine.split(" ");
 		int node1 = Integer.parseInt(edge[0]);
@@ -24,12 +25,10 @@ public class GraphsLibrary implements GraphsMethods {
 		graph.addEdge(node1, node2, weight);
 	}
 
-	/**
-	 * Metodo que le um arquivo de texto com um grafo e passa seus elementos para um
-	 * array
+	/** Metodo que le um arquivo de texto com um grafo e passa seus elementos para um array
 	 *
 	 * @param path
-	 *            Caminho no qual se encontra o arquivo com o grafo
+	 * 		Caminho no qual se encontra o arquivo com o grafo
 	 *
 	 * @throws FileNotFoundException
 	 */
@@ -49,10 +48,10 @@ public class GraphsLibrary implements GraphsMethods {
 			}
 
 			graph.setDefault_weigth(false);
-
+			
 			return graph;
 
-		} catch (IOException e) {
+		} catch(IOException e) {
 			throw new FileNotFoundException("Arquivo do grafo nao foi encontrado!");
 		}
 	}
@@ -74,10 +73,10 @@ public class GraphsLibrary implements GraphsMethods {
 			}
 
 			graph.setDefault_weigth(true);
-
+			
 			return graph;
 
-		} catch (IOException e) {
+		} catch(IOException e) {
 			throw new FileNotFoundException("Arquivo do grafo nao foi encontrado!");
 		}
 	}
@@ -98,17 +97,17 @@ public class GraphsLibrary implements GraphsMethods {
 	@Override
 	public float getMeanEdge(Graph graph) {
 		float sum = 0;
-
-		for (int i = 0; i < graph.getAdjacencyList().length; i++) {
-			if (graph.getAdjacencyList()[i] != null) {
-				for (int j = 0; j < graph.getAdjacencyList()[i].getAdjacentNodes().size(); j++) {
-					sum += graph.getAdjacencyList()[i].getAdjacentNodes().get(j).getWeight();
+		
+		for(int i = 0; i < graph.getAdjacencyList().length; i++) {
+			if(graph.getAdjacencyList()[i] != null) {
+				for(int j = 0; j < graph.getAdjacencyList()[i].getAdjacentNodes().size(); j++) {
+					sum+= graph.getAdjacencyList()[i].getAdjacentNodes().get(j).getWeight();
 				}
 			}
 		}
-
+		
 		sum = sum / 2;
-
+		
 		return sum / (graph.getNumEdges());
 	}
 
@@ -130,11 +129,9 @@ public class GraphsLibrary implements GraphsMethods {
 	public String DFS(Graph graph, int v) {
 		String[] out = new String[graph.getNumVertex()];
 		int[] levels = new int[graph.getNumVertex() + 1];
-		String res = "";
-		for (Edge edge : (graph.getAdjacencyList()[v].getAdjacentNodes()))
-			res += graph.DFS(graph, v + 1, levels, out);
-		return res;
-	}
+	    String[] res = graph.DFS(graph, v + 1, levels, out);
+	    return String.join("\n", res);
+	 }
 
 	@Override
 	public boolean connected(Graph graph) {
@@ -142,20 +139,16 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String shortestPath(Graph graph, Node v1, Node v2) {
-		return graph.shortestPath(v1, v2);
+	public String shortestPath() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public String mst(Graph graph) {
-		if (graph.getDefault_weigth() && graph.connected()) {
-			Graph mst = graph.graphMST();
-			int firstNode = mst.getAdjacencyList()[1].getIndex();
-			return BFS(mst, firstNode);
-		} else {
-			return "Grafo não possui peso nas aresta ou não é conectado";
-		}
-
+	public String mst() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	
 }
