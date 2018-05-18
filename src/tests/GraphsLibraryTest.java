@@ -77,8 +77,50 @@ class GraphsLibraryTest {
 		
 		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
 		
+		String typeAM = graphLibrary.graphRepresentation(g1, "AM");
+		
+		String typeALExpec ="1 - 2(0.1) 5(1.0) \r\n" + 
+							"2 - 1(0.1) 5(0.2) \r\n" + 
+							"3 - 5(5.0) 4(-9.5) \r\n" + 
+							"4 - 3(-9.5) 5(2.3) \r\n" + 
+							"5 - 2(0.2) 3(5.0) 4(2.3) 1(1.0) \r\n";
+		assertEquals(typeALExpec, typeAL);
+		
+		String typeAMExpec =" 0 1 2 3 4 5\r\n" + 
+							" 1 0 0.1 0 0 1.0\r\n" + 
+							" 2 0.1 0 0 0 0.2\r\n" + 
+							" 3 0 0 0 -9.5 5.0\r\n" + 
+							" 4 0 0 -9.5 0 2.3\r\n" + 
+							" 5 1.0 0.2 5.0 2.3 0\r\n";
+		
+		assertEquals(typeAMExpec, typeAM);
 		
 		
+		GraphsLibrary graph2 = new GraphsLibrary();
+		Graph g2 = graph2.readGraph("weightedGraph.txt");
+		
+		
+		
+		String typeAL1 = graph2.graphRepresentation(g2, "AL");
+		
+		String typeAM1= graph2.graphRepresentation(g2, "AM");
+		
+		String typeAL1Expec ="1 - 2 5 \r\n" + 
+							"2 - 1 5 \r\n" + 
+							"3 - 5 4 \r\n" + 
+							"4 - 3 5 \r\n" + 
+							"5 - 2 3 4 1 \r\n";
+		
+		assertEquals(typeAL1Expec, typeAL1);
+		
+		String typeAM1Expec=" 0 1 2 3 4 5\r\n" + 
+							" 1 0 1 0 0 1\r\n" + 
+							" 2 1 0 0 0 1\r\n" + 
+							" 3 0 0 0 1 1\r\n" + 
+							" 4 0 0 1 0 1\r\n" + 
+							" 5 1 1 1 1 0\r\n";
+		
+		assertEquals(typeAM1Expec, typeAM1);
 		
 	}
 	@Test
