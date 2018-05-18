@@ -1,6 +1,7 @@
 package library;
 
 import entity.Graph;
+import entity.Node;
 
 import java.io.FileNotFoundException;
 
@@ -26,7 +27,7 @@ public interface GraphsMethods {
 	
 	public boolean connected(Graph graph);
 	
-	public String shortestPath(/*v1, v2 */);
+	public String shortestPath(Graph graph, Node v1, Node v2);
 	
 	public String mst(/*graph*/);
 	

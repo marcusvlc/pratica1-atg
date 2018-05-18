@@ -1,9 +1,16 @@
 package entity;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.SingleSelectionModel;
 
 public class Graph {
+
+	private static final double BigDecimal = 0;
 
 	private boolean default_weigth;
 	
@@ -240,7 +247,66 @@ public class Graph {
 	public void setDefault_weigth(boolean default_weigth) {
 		this.default_weigth = default_weigth;
 	}
-	
-	
+
+	public String shortestPath(Node v1, Node v2) {
+		Map<Node, Double> graphNodes = new HashMap<Node, Double>();
+		Map<Integer, Double> nodeDistance = new HashMap<Integer, Double>();
+		Map<Integer, Integer> nodeParent = new HashMap<Integer, Integer>();
+		
+		graphNodes.put(v1, 0.0);
+		nodeParent.put(v1.getIndex(), null);
+		
+		for (int i = 0; i < adjacencyList.length; i++) {
+			if (adjacencyList[i] != null && !(adjacencyList[i].getIndex() == v1.getIndex()))
+				graphNodes.put(adjacencyList[i], null);	
+		}
+		
+		while(!graphNodes.isEmpty()) {
+			Node actualNode = extractMin(graphNodes);
+			List<Edge> adjacentNodes = actualNode.getAdjacentNodes();
+			nodeDistance.put(actualNode.getIndex(), graphNodes.get(actualNode));
+			
+			for (int i = 0; i < adjacentNodes.size(); i++) {
+				Node adjacentNode = addOrReturnVertex(adjacentNodes.get(i).getNodeIndex());
+				
+				if(graphNodes.containsKey(adjacentNode)){
+					double newWeight = nodeDistance.get(actualNode.getIndex()) + adjacentNodes.get(i).getWeight();
+					
+					if(graphNodes.get(adjacentNode) == null || newWeight < graphNodes.get(adjacentNode)) {
+						graphNodes.put(adjacentNode, newWeight);
+						nodeParent.put(adjacentNode.getIndex(), actualNode.getIndex());
+					}
+				}
+			}
+			
+			graphNodes.remove(actualNode);
+		}
+		
+		String shortestPath = v2.getIndex() + "";
+		
+		Node auxNode = v2;
+		while(auxNode != v1) {
+			int nodeIndex = nodeParent.get(auxNode.getIndex());
+			shortestPath = nodeIndex + " " + shortestPath ;
+			auxNode = addOrReturnVertex(nodeIndex);
+		}
+		
+		return shortestPath;
+	}
+
+	private Node extractMin(Map<Node, Double> graphNodes ) {
+		double minValue = Double.MAX_VALUE;
+		Node nodeIndex = null;
+
+		for (int i = 0; i < adjacencyList.length; i++) {
+			
+			if(graphNodes.get(adjacencyList[i]) != null && graphNodes.get(adjacencyList[i]) < minValue) {
+				minValue = graphNodes.get(adjacencyList[i]);
+				nodeIndex = adjacencyList[i];
+			}
+		}	
+		
+		return nodeIndex;
+	}
 
 }

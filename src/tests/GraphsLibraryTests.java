@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import entity.Graph;
+import entity.Node;
 import junit.framework.Assert;
 import library.GraphsLibrary;
 
@@ -16,6 +17,7 @@ class GraphsLibraryTests {
 	private GraphsLibrary graphLibrary;
 	private Graph basicGraph;
 	private Graph desconnectedGraph;
+	private Graph weightedGraph;
 	
 	@Before
 	public void init() {
@@ -110,7 +112,17 @@ class GraphsLibraryTests {
 		assertEquals(typeAMExpec, typeAM);
 	}
 	
-	
+	@Test
+	public void testShortestPath() throws FileNotFoundException {
+		graphLibrary = new GraphsLibrary();
+		weightedGraph = graphLibrary.readGraph("weightedGraph.txt");
+		Node[] nodes = weightedGraph.getAdjacencyList();
+		
+		assertEquals("1 5 3", graphLibrary.shortestPath(weightedGraph, nodes[1], nodes[3]));
+		assertEquals("1 5 4", graphLibrary.shortestPath(weightedGraph, nodes[1], nodes[4]));
+		assertEquals("1 2", graphLibrary.shortestPath(weightedGraph, nodes[1], nodes[2]));
+		
+	}
 	
 	
 	

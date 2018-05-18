@@ -3,6 +3,7 @@ package library;
 import java.io.*;
 
 import entity.Graph;
+import entity.Node;
 
 public class GraphsLibrary implements GraphsMethods {
 
@@ -134,9 +135,8 @@ public class GraphsLibrary implements GraphsMethods {
 	}
 
 	@Override
-	public String shortestPath() {
-		// TODO Auto-generated method stub
-		return null;
+	public String shortestPath(Graph graph, Node v1, Node v2) {
+		return graph.shortestPath(v1, v2);
 	}
 
 	@Override
