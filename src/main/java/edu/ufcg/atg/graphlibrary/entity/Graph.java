@@ -1,7 +1,12 @@
-package entity;
+package edu.ufcg.atg.graphlibrary.entity;
 
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 
 public class Graph {
 
@@ -41,20 +46,18 @@ public class Graph {
 		return node;
 	}
 
-	// Adiciona aresta sem peso (peso padrao eh 1)
 	public void addEdge(int from, int to) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex());
-		toNode.addAdjacentNode(fromNode.getIndex());
+		fromNode.addAdjacentNode(toNode.getIndex(), from);
+		toNode.addAdjacentNode(fromNode.getIndex(), to);
 	}
 
-	// Adiciona aresta com peso
 	public void addEdge(int from, int to, double weight) {
 		Node fromNode = this.addOrReturnVertex(from);
 		Node toNode = this.addOrReturnVertex(to);
-		fromNode.addAdjacentNode(toNode.getIndex(), weight);
-		toNode.addAdjacentNode(fromNode.getIndex(), weight);
+		fromNode.addAdjacentNode(toNode.getIndex(), weight, from);
+		toNode.addAdjacentNode(fromNode.getIndex(), weight, to);
 	}
 
 	public String[] BFS(int index) {
@@ -83,20 +86,18 @@ public class Graph {
 
 		return out;
 	}
-	
-	
-	public String[] DFS(Graph graph, int index, int[] levels, String[] out) {
-	     for (Edge edge : (adjacencyList[index].getAdjacentNodes())) {
-	         if (levels[edge.getNodeIndex()] == 0){ 
-	        	 out[edge.getNodeIndex()] = edge.getNodeIndex() + " ";
-	        	 levels[edge.getNodeIndex()] = levels[index] + 1;
-	        	 DFS(graph, edge.getNodeIndex(), levels, out);
-	         }
-	}
-		return out;
-	     
-	}
 
+	public String[] DFS(Graph graph, int index, int[] levels, String[] out) {
+		for (Edge edge : (adjacencyList[index].getAdjacentNodes())) {
+			if (levels[edge.getNodeIndex()] == 0) {
+				out[edge.getNodeIndex()] = edge.getNodeIndex() + " ";
+				levels[edge.getNodeIndex()] = levels[index] + 1;
+				DFS(graph, edge.getNodeIndex(), levels, out);
+			}
+		}
+		return out;
+
+	}
 
 	public String graphRepresentation(String type) {
 
@@ -201,7 +202,12 @@ public class Graph {
 		}
 		return graph;
 	}
-
+	
+	/**
+	 * Retorna true se o grafo eh conexo, ou seja, existe um caminho entre qualquer par de nodes
+	 * 
+	 * @return Boolean true se eh conexo, false caso contrario
+	 */
 	public boolean connected() {
 		Node auxNode = firstNotNullNode();
 
@@ -235,7 +241,12 @@ public class Graph {
 		return false;
 
 	}
-
+	
+	/**
+	 * Metodo auxiliar para connected. Encontra o primeiro Node da adjacencyList
+	 * 
+	 * @return Node, primeiro node encontrado da adjacencyList
+	 */
 	private Node firstNotNullNode() {
 		Node node = null;
 
@@ -256,5 +267,135 @@ public class Graph {
 	public void setDefault_weigth(boolean default_weigth) {
 		this.default_weigth = default_weigth;
 	}
+	
+	/**
+	 * Encontra o menor caminho entre dois nodes dados
+	 * 
+	 * @param Node "raiz", v1
+	 * @param Node a ser encontrado atraves do menor caminho, v2
+	 * 
+	 * @return String contendo o menor caminho
+	 */
+	public String shortestPath(Node v1, Node v2) {
+		Map<Node, Double> graphNodes = new HashMap<Node, Double>();
+		Map<Integer, Double> nodeDistance = new HashMap<Integer, Double>();
+		Map<Integer, Integer> nodeParent = new HashMap<Integer, Integer>();
+		
+		graphNodes.put(v1, 0.0);
+		nodeParent.put(v1.getIndex(), null);
+		
+		for (int i = 0; i < adjacencyList.length; i++) {
+			if (adjacencyList[i] != null && !(adjacencyList[i].getIndex() == v1.getIndex()))
+				graphNodes.put(adjacencyList[i], null);	
+		}
+		
+		while(!graphNodes.isEmpty()) {
+			Node actualNode = extractMin(graphNodes);
+			List<Edge> adjacentNodes = actualNode.getAdjacentNodes();
+			nodeDistance.put(actualNode.getIndex(), graphNodes.get(actualNode));
+			
+			for (int i = 0; i < adjacentNodes.size(); i++) {
+				Node adjacentNode = addOrReturnVertex(adjacentNodes.get(i).getNodeIndex());
+				
+				if(graphNodes.containsKey(adjacentNode)){
+					double newWeight = nodeDistance.get(actualNode.getIndex()) + adjacentNodes.get(i).getWeight();
+					
+					if(graphNodes.get(adjacentNode) == null || newWeight < graphNodes.get(adjacentNode)) {
+						graphNodes.put(adjacentNode, newWeight);
+						nodeParent.put(adjacentNode.getIndex(), actualNode.getIndex());
+					}
+				}
+			}
+			
+			graphNodes.remove(actualNode);
+		}
+		
+		String shortestPath = v2.getIndex() + "";
+		
+		Node auxNode = v2;
+		while(auxNode != v1) {
+			int nodeIndex = nodeParent.get(auxNode.getIndex());
+			shortestPath = nodeIndex + " " + shortestPath ;
+			auxNode = addOrReturnVertex(nodeIndex);
+		}
+		
+		return shortestPath;
+	}
+	
+	/**
+	 * Metodo auxiliar para o shortestPath que encontra o node com menor peso em um Map
+	 * 
+	 * @param Map<Node, Double> que contem os nodes e seu respectivos pesos 
+	 * 
+	 * @return Node, node com o menor peso do Map
+	 */
+	private Node extractMin(Map<Node, Double> graphNodes ) {
+		double minValue = Double.MAX_VALUE;
+		Node nodeIndex = null;
 
+		for (int i = 0; i < adjacencyList.length; i++) {
+			
+			if(graphNodes.get(adjacencyList[i]) != null && graphNodes.get(adjacencyList[i]) < minValue) {
+				minValue = graphNodes.get(adjacencyList[i]);
+				nodeIndex = adjacencyList[i];
+			}
+		}	
+		
+		return nodeIndex;
+	}
+
+	private int find(int[] subSet, int v) {
+
+		if (subSet[v] == 0)
+			return v;
+		return find(subSet, subSet[v]);
+
+	}
+
+	private void union(int[] subSet, int v1, int v2) {
+
+		int v1_set = find(subSet, v1);
+		int v2_set = find(subSet, v2);
+
+		subSet[v1_set] = v2_set;
+
+	}
+
+	public Graph graphMST() {
+		ArrayList<Edge> arvore = new ArrayList<>();
+		ArrayList<Edge> arestas = listEdges();
+		int[] subSet = new int[adjacencyList.length - 1];
+		
+		for (Edge aresta : arestas) {
+			int v1 = find(subSet, aresta.getNodeIndexPre()-1);
+			int v2 = find(subSet, aresta.getNodeIndex()-1);
+			if(v1 != v2) {
+				arvore.add(aresta);
+				union(subSet, v1, v2);
+			}
+		}
+		Graph graph = new Graph(getNumVertex());
+		graph.setDefault_weigth(true);
+		for (Edge edge : arvore) {
+			graph.addEdge(edge.getNodeIndexPre(), edge.getNodeIndex(), edge.getWeight());
+		}
+		return graph;
+	}
+
+	private ArrayList<Edge> listEdges() {
+		ArrayList<Edge> edges = new ArrayList<>();
+		
+		for (int i = 1; i < adjacencyList.length; i++) {
+			List<Edge> edgesNode = adjacencyList[i].getAdjacentNodes();
+
+			for (Edge edge : edgesNode) {
+
+				edges.add(edge);
+
+			}
+		}
+		Collections.sort(edges);
+		return edges;
+	}
+	
 }
