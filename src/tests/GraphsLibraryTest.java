@@ -81,6 +81,30 @@ class GraphsLibraryTest {
 		
 		
 	}
+	@Test
+	public void testMST() throws FileNotFoundException {
+		graphLibrary = new GraphsLibrary();
+		weightedGraph = graphLibrary.readWeightedGraph("graph.txt");
+		
+		String bfsMST = graphLibrary.mst(weightedGraph);
+		String bfsMSTexpec ="1 - 0 -\n" + 
+							"2 - 1 1\n" + 
+							"3 - 4 4\n" + 
+							"4 - 3 5\n" + 
+							"5 - 2 2\n";
+		assertEquals(bfsMSTexpec, bfsMST);
+		
+		GraphsLibrary graph2 = new GraphsLibrary();
+		Graph g2 = graph2.readWeightedGraph("weightedGraph.txt");
+		
+		String g2MST = graph2.mst(g2);
+		String g2MSTExpec = "1 - 0 -\n" + 
+							"2 - 1 1\n" + 
+							"3 - 2 5\n" + 
+							"4 - 2 5\n" + 
+							"5 - 1 1\n";
+		assertEquals(g2MSTExpec, g2MST);
+	}
 	
 	@Test
 	public void testShortestPath() throws FileNotFoundException {

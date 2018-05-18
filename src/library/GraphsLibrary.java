@@ -151,7 +151,7 @@ public class GraphsLibrary implements GraphsMethods {
 		if (graph.getDefault_weigth() && graph.connected()) {
 			Graph mst = graph.graphMST();
 			int firstNode = mst.getAdjacencyList()[1].getIndex();
-			return BFS(graph, firstNode);
+			return BFS(mst, firstNode);
 		} else {
 			return "Grafo não possui peso nas aresta ou não é conectado";
 		}
