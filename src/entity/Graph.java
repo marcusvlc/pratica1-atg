@@ -318,6 +318,10 @@ public class Graph {
 		
 		Graph graphMSTAux = new Graph(this.adjacencyList.length);
 		
+		for (int i = 1; i < adjacencyList.length; i++) {
+			
+		}
+		
 		
 		
 		return false;
