@@ -29,7 +29,7 @@ public interface GraphsMethods {
 	
 	public String shortestPath(Graph graph, Node v1, Node v2);
 	
-	public String mst(/*graph*/);
+	public String mst(Graph graph);
 	
 
 }
