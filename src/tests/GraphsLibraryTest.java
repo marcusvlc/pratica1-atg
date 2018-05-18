@@ -77,9 +77,9 @@ class GraphsLibraryTest {
 		
 		String typeAL = graphLibrary.graphRepresentation(g1, "AL");
 		
-		boolean isCycle = g1.union_find();
 		
-		ArrayList<Edge> edges = g1.listEdges();
+		
+		
 	}
 	
 	@Test
