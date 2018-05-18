@@ -7,6 +7,8 @@ public class Node {
 
 	private int index;
 	private List<Edge> edges;
+	public boolean visited;
+	public String label;
 
 	public Node(int index) {
 		this.index = index;
