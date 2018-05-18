@@ -6,6 +6,11 @@ import entity.Graph;
 import entity.Node;
 
 public class GraphsLibrary implements GraphsMethods {
+	
+	public static void main(String[] args) {
+		System.out.println("Bem vindo a biblioteca de grafos");
+		System.out.println("Adicione a jar ao seu projeto e utilize as funcionalidades!");
+	}
 
 	
 	/**
